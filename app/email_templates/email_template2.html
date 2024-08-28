@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+    <style>
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body, html {{
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #333333;
+            background-color: #f0f0f0; /* Added background color */
+        }}
+
+        /* Container */
+        .container {{
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out; /* Added fade-in animation */
+        }}
+
+        /* Header */
+        .header {{
+            background-color: #f0f6f6;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            animation: pop 0.5s ease-out; /* Added pop animation */
+        }}
+
+        .header h1 {{
+            margin: 0;
+            padding: 0;
+            color: #007bff;
+            font-weight: 700;
+            font-size: 24px;
+            white-space: nowrap; /* Prevent line break */
+        }}
+
+        /* Banner */
+        .banner {{
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+            border: 1px black solid;
+        }}
+
+        .banner img {{
+            display: block;
+            width: 100%;
+            height: auto;
+        }}
+
+        .banner-overlay {{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }}
+
+        .banner-overlay h2 {{
+            color: #ffffff;
+            font-size: 28px;
+            margin: 0;
+            padding: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }}
+
+        /* Content */
+        .content {{
+            padding: 30px;
+            text-align: left;
+        }}
+
+        .content p {{
+            margin: 0 0 15px;
+        }}
+
+        /* Footer */
+        .footer {{
+            background-color: #f0f6f6;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }}
+
+        .footer a {{
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background-color 0.3s, color 0.3s;
+        }}
+
+        .products:hover {{
+            background-color: #007bff;
+            color: #ffffff;
+        }}
+
+        .products {{
+            margin: 20px 0 0;
+            color: #555555;
+        }}
+
+        .footer p:last-child {{
+            margin-bottom: 0;
+        }}
+
+        /* Contact Info */
+        .contact-info {{
+            margin-top: 20px;
+            text-align: center;
+            color: #555555;
+        }}
+
+        .contact-info p {{
+            margin: 5px 0;
+        }}
+
+        .logo {{
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            max-width: 100px;
+            max-height: 50px;
+            border-radius: 4px;
+        }}
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <marquee behavior="scroll" direction="left" scrollamount="8"><h1>{heading}</h1></marquee>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+        <img src="{banner_link}" alt="Banner">
+        
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <p>{paragraph1}</p>
+        <p>{paragraph2}</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="{product_view}" class="products">View Products</a>
+
+        <div class="contact-info">
+            <div>
+                <p>Contact us:</p>
+            </div>
+            <div>
+                <p>Email: {email}</p>
+            </div>
+            <div>
+                <p>Phone: {phone}</p>
+            </div>
+        </div>
+        <img src="{company_logo}" alt="Company Logo" class="logo">
+    </div>
+
+</div>
+</body>
+</html>

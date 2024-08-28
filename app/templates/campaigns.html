@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaigns Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        canvas {
+            max-width: 80%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Campaigns Dashboard</h1>
+    <table id="campaignTable">
+        <tr>
+            <th>Campaign ID</th>
+            <th>Long Opens</th>
+            <th>Short Opens</th>
+            <th>None Opened</th>
+            <th>Status</th>
+        </tr>
+        {% for campaign in campaigns %}
+        <tr>
+            <td><a href="/campaign/{{ campaign.campaign_id }}/links">{{ campaign.campaign_id }}</a></td>
+            <td>{{ campaign.long_opens }}</td>
+            <td>{{ campaign.short_opens }}</td>
+            <td>{{ campaign.none_opened }}</td>
+            <td>{{ campaign.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <canvas id="campaignChart"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var campaignTable = document.getElementById('campaignTable');
+        var campaignIDs = [];
+        var longOpens = [];
+        var shortOpens = [];
+        var noneOpened = [];
+
+        // Extract data from the table
+        for (var i = 1; i < campaignTable.rows.length; i++) {
+            campaignIDs.push(campaignTable.rows[i].cells[0].innerText);
+            longOpens.push(parseInt(campaignTable.rows[i].cells[1].innerText));
+            shortOpens.push(parseInt(campaignTable.rows[i].cells[2].innerText));
+            noneOpened.push(parseInt(campaignTable.rows[i].cells[3].innerText));
+        }
+
+        var ctx = document.getElementById('campaignChart').getContext('2d');
+        var campaignChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: campaignIDs,
+                datasets: [{
+                    label: 'Long Opens',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    data: longOpens
+                }, {
+                    label: 'Short Opens',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    data: shortOpens
+                }, {
+                    label: 'None Opened',
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1,
+                    data: noneOpened
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
